@@ -1,0 +1,18 @@
+.area
+{
+   border:2px ridge #dfdfdf;
+    margin-top: 20px;
+    text-align: center;
+     box-shadow: -1px 4px 8px 0 rgba(0, 0, 0, 0.2), 5px 6px 10px 0 rgba(0, 0, 0, 0.19);
+}
+.area > p
+{
+    background-color: #026;
+    font-family: 'Franklin Gothic Medium', 'Arial Narrow', Arial, sans-serif;
+    padding: 40px 0px;
+    margin:0px 0px 0px 0px;
+    width:100%;
+    color:white;
+    font-size: 28px;
+    background-image: url("../../assets/grass.png");
+}

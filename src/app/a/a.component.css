@@ -1,0 +1,43 @@
+.example-fill-remaining-space {
+
+  flex: 1 1 ;
+}
+form
+{
+     margin-top: 5px;
+}
+ .cart-form {
+
+    width: 30%;
+    min-width: 178px;
+    position: relative;
+    left: 30%;
+    top: 90px;
+    padding: 40px 1px;
+}
+ .example-form {
+
+    width: 91%;
+    min-width: 178px;
+    margin-left: 6px;
+    top: 91px;
+    padding: 16px 26px;
+
+}
+  #action
+  {
+    padding: 30px;
+  }
+ .example-form md-form-field, .example-form md-select
+{
+  width: 98%;
+    padding: 2px;
+}
+   .example-form md-select md-option 
+   {
+      width:113%;
+      text-align: center;
+   }
+.example-full-width {
+  width: 100%;
+}

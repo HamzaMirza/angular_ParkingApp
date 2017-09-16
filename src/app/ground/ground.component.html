@@ -1,0 +1,107 @@
+<p>
+  ground works!
+</p>
+<!-- Ground View  -->
+
+  <div class="jobView col-xs-offset-3">
+     <div class="row">
+         <div class="col-xs-3" id="container" *ngFor="let area of (GetAreasService.areas$ | async); let index=index;trackBy: trackById">
+     
+       
+              <div  class="area" >
+                <p clickable data-target="#loginModal" data-toggle="modal" (click)="loadSlots(area)">
+                  {{area.areaName|uppercase}}
+                </p>
+              </div>
+        </div>
+    </div>
+   </div>
+<!-- Ground View  -->
+
+<!-- Slots View  -->
+<div class="modal fade col-xs-12" tabindex="-1" id="loginModal"
+        data-keyboard="false" data-backdrop="static">
+    <div class="modal-dialog modal-lg">
+        <div class="modal-content">
+            <div class="modal-header">
+                <button type="button" class="close" data-dismiss="modal" (click)="resetSlot()">
+                    &times;
+                </button>
+                <h4 class="modal-title">{{this.area.name}}</h4>
+            </div>
+            <div class="modal-body">
+              <span class="well text-center col-xs-12" style="padding:20px;" *ngIf="error!='hide'">{{error}}</span>
+ <form #f="ngForm" (ngSubmit)="onBook(f.value)" >
+
+<table class="table table-striped table-hover ">
+  <thead>
+    <tr>
+      <th>Slot #</th>
+      <th>Start Date</th>
+      <th>Start Time</th>
+      <th>End Time</th>
+      <th>End Date</th>
+      <th>Status</th>
+      <th>Check Availability</th>
+      <th>Book</th>
+    </tr>
+  </thead>
+  <tbody>
+    <tr *ngFor="let i of area.slots; let ind=index;" >
+      <td >{{ind+1}}</td>
+      <td><owl-date-time name="startDate" [(ngModel)]="sd[ind]" [type]="'calendar'" [dateFormat]="'YYYY-MM-DD'" [placeHolder]="'yyyy/mm/dd'"  [inputId]="'input1'"></owl-date-time></td>
+      <td><owl-date-time [(ngModel)]="st[ind]" [type]="'timer'" [dateFormat]="'hh:mm'" [placeHolder]="'hh:mm'"  [inputId]="'input2'" name="startTime"></owl-date-time></td>
+      <td><owl-date-time [(ngModel)]="et[ind]" [type]="'timer'" [dateFormat]="'hh:mm'" [placeHolder]="'hh:mm'"  [inputId]="'input3'" name="endTime"></owl-date-time></td>      
+      <td><owl-date-time name="endDate" [(ngModel)]="ed[ind]" [type]="'calendar'" [dateFormat]="'YYYY-MM-DD'" [placeHolder]="'yyyy/mm/dd'" [inputId]="'input4'"></owl-date-time></td>
+      <td  *ngIf="area.isAvail && ind==area.slotsIndex ; then showAvail; else showDashAvail"></td>
+      <td><button class="btn btn-warning" (click)="check(ind)" type="button">Check</button></td>
+      <td><button class="btn btn-primary" type="submit" [disabled]="!enablebook && ind==area.slotsIndex || enablebook && ind!=area.slotsIndex  || !enablebook && ind!=area.slotsIndex ">Book</button></td>
+      <ng-template #showAvail >
+        <td [ngClass]="availableClasses">{{area.availText}}</td>
+      </ng-template>
+      <ng-template #showDashAvail>
+        <td *ngIf="!area.isAvail && ind==area.slotsIndex ; then showNotAvail; else showDash"></td>
+      </ng-template>
+       <ng-template #showDash>
+        <td > ---</td>
+      </ng-template>
+       <ng-template #showNotAvail>
+         <td [ngClass]="availableClasses">{{area.availText}}</td>
+      </ng-template>
+    </tr>
+    </tbody>
+  
+</table> 
+ </form>     </div>
+        </div>
+    </div>
+</div>
+<!--
+  <input type="date" placeholder="start date Here" name="startDate" [(ngModel)]="sd[ind]" required>
+  <input type="time" placeholder="start time Here" name="startTime" [(ngModel)]="st[ind]" required >
+  <input type="time" placeholder="end time Here"  name="endTime" [(ngModel)]="et[ind]" required >
+  <input type="date" placeholder="end date Here" name="endDate" [(ngModel)]="ed[ind]" required >
+  -->
+<!-- Slots View  -->
+
+
+
+
+<!-- Alert MSG  -->
+<div  *ngIf="isformSubmitted">
+  <div  *ngIf="isCorrect;then success;else danger;" style="bottom:0px;position: absolute;width: 100%;">
+  </div>
+</div>
+<ng-template #success>
+  <div class="alert alert-dismissible alert-success text-center msgShow" style="bottom:0px;position: absolute;width: 100%;" >
+  <button type="button" class="close" data-dismiss="alert" (click)="changeFlag()">&times;</button>
+  <strong> Booking successfully!</strong>
+  </div>
+</ng-template>
+<ng-template #danger>
+  <div class="alert alert-dismissible alert-danger text-center msgShow" style="bottom:0px;position: absolute;width: 100%;">
+  <button type="button" class="close" data-dismiss="alert" (click)="changeFlag()">&times;</button>
+  <strong> Booking Failure!</strong>
+  </div>
+</ng-template>
+<!-- Alert MSG  -->

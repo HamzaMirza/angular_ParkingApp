@@ -1,0 +1,101 @@
+<!-- <link rel="stylesheet" type="text/css" href="assets/style/picker.min.css" />  -->
+<md-toolbar color="primary">
+
+     <span>Parking App</span>
+     <div class="button-row" fxLayout="row" fxShow="false" fxShow.gt-sm >
+      <button md-button >View Users</button>
+      <button md-button >View Bookings</button>
+      <button md-button >View FeedBack</button>
+      <button md-button >View Areas</button>
+      <button md-button >Insert Areas</button>
+    </div>
+
+    <button md-button [md-menu-trigger-for]="NavMenu" fxHide="false" fxHide.gt-sm>
+     <md-icon>menu</md-icon>
+    </button>
+    <md-menu x-position="before" #NavMenu="mdMenu" >
+      <button md-button >View Users</button>
+      <button md-button >View Bookings</button>
+      <button md-button >View FeedBack</button>
+      <button md-button >View Areas</button>
+      <button md-button >Insert Areas</button>
+    </md-menu>
+
+
+     <span class="example-fill-remaining-space"></span>
+
+     <div fxLayout="row" fxShow="false" fxShow.gt-sm>
+         <span>User Name</span>
+     <button md-button [md-menu-trigger-for]="menu">         
+        <md-icon>more_vert</md-icon>
+     </button>
+        
+     </div>
+
+     <button md-button [md-menu-trigger-for]="menu"  fxHide="false" fxHide.gt-sm>
+            <span>User Name</span>
+     </button>
+       <md-menu #menu="mdMenu" x-position="before" >
+            <button md-menu-item (click)="setDisplayProfile()">
+              <md-icon>fingerprint</md-icon>
+              <span>Edit Profile</span>
+            </button>
+            <button md-menu-item  (click)="logout()">
+              <md-icon>sentiment_very_satisfied</md-icon>
+              <span>Disable alerts</span>
+            </button>
+       </md-menu>    
+</md-toolbar> 
+
+<owl-date-time [(ngModel)]="moment" ></owl-date-time>
+<div class="input-control">
+                    <label for="input1">Timer Only:</label>
+                    <owl-date-time [(ngModel)]="input1Moment" [type]="'timer'"
+                                   [dateFormat]="'hh:mm'"
+                                   [placeHolder]="'hh:mm'" [inputId]="'input1'"></owl-date-time>
+                </div>
+ <div class="input-control">
+                    <label for="input4">Min-Max</label>
+                    <owl-date-time [(ngModel)]="input4Moment" [type]="'calendar'"
+                                   [dateFormat]="'YYYY-MM-DD'" [min]="min" [max]="max"
+                                   [placeHolder]="'yyyy/mm/dd'" [inputId]="'input4'"></owl-date-time>
+                </div>
+                                   <button md-raised-button style="float:left;" color="primary" (click)="getB()">LOG IN</button>
+<!--             
+<md-card class="cart-form">
+  <md-card-title style="border-left:6px solid red;padding-left: 23px;color: red;">
+        
+   LOGIN
+    </md-card-title>
+  <md-card-content>
+    <form class="example-form">
+    <md-form-field class="example-half-width"  color="accent">
+      <input mdInput placeholder="USER NAME" name="userName">
+      <br>
+    </md-form-field>
+    <md-form-field class="example-half-width"  color="accent">
+      <input mdInput placeholder="EMAIL" name="email">
+      <br>
+    </md-form-field>
+    <md-form-field class="example-half-width"  color="accent">
+      <input mdInput placeholder="PASSWORD" name="password" type="password">
+      <br>
+    </md-form-field>
+      <md-select placeholder="Favorite food"  color="accent">
+        <md-option *ngFor="let food of tiles" [value]="food.text">
+          {{ food.text }}
+        </md-option>
+      </md-select>
+      <md-grid-list cols="2" rowHeight="2:1" id="action">
+       <md-grid-tile> <button md-raised-button style="float:left;" color="primary">LOG IN</button></md-grid-tile>
+       <md-grid-tile> <button md-raised-button style="float:right;" color="accent">SIGN UP</button></md-grid-tile>
+      </md-grid-list>
+
+    </form>
+    </md-card-content>
+</md-card> -->
+
+
+  
+
+

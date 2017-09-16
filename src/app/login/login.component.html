@@ -1,0 +1,73 @@
+<div id="containerLogin" class="col-xs-12 col-md-6 col-md-offset-1">
+<div class="row">
+    <div>
+        <div id="initialStage"  class="col-xs-12 col-md-6 col-md-offset-3">
+							<h1 class="h1">LOG IN / SIGN UP</h1>
+		</div>
+    </div>
+</div>
+
+    <div class="row">
+        <div class="col-xs-12 col-md-6 col-md-offset-3" >
+        
+               <ul class="nav nav-tabs nav-justified">
+                   <li class="active"><a href="#LoginTab" data-toggle="tab">Log In</a></li>
+                   <li><a href="#SignUpTab" data-toggle="tab">Sign Up</a></li>
+               </ul>
+                
+                 <div class="tab-content">
+                      <p id="error" class="alert alert-warning" [hidden]="!error">{{error}}</p>   
+                    <div id="LoginTab" class="tab-pane fade in active">
+                            <label for="userName">Email</label>
+                            <br>
+                            <input type="text" placeholder="Enter Email Here" [(ngModel)]="email">
+                             <br>
+                            <label for="Password">Password</label>
+                            <br>
+                            <input type="password" placeholder="Enter Password Here" [(ngModel)]="password">
+                            <br>
+
+                           <div class="row">
+                               <div class="col-xs-6 col-xs-offset-2">
+                                 <i class="btn btn-primary pull-right" (click)="login()"> Log In </i>
+                               </div>
+                                
+                           </div>
+                    </div>
+                        <div id="SignUpTab" class="tab-pane fade">
+                              <label for="userName">User Name</label>
+                            <br>
+                            <input type="text" placeholder="Enter User Name Here" [(ngModel)]="userName">
+                             <br>
+                            <label for="Email">Email</label>
+                            <br>
+                            <input type="text" placeholder="Enter Email Here" [(ngModel)]="email">
+                             <br>
+                            <label for="Password">Password</label>
+                            <br>
+                            <input type="password" placeholder="Enter Password Here" [(ngModel)]="password">
+                            <br>
+                             <label for="rePassword">Re Enter Password</label>
+                            <br>
+                            <input type="password" placeholder="Enter Password Here" [(ngModel)]="repassword">
+                            <br>
+                             <label for="cellNum">Cell phone</label>
+                            <br>
+                            <input type="number" placeholder="Cell Number Here" [(ngModel)]="cellNum">
+                            <br>
+                            <select class="form-control" [(ngModel)]="typeSelected" >
+                                <option *ngFor="let type of types;">{{type}}</option>
+                                
+                            </select>
+                            <br>
+                            <div class="row">
+                               <div class="col-xs-6 col-xs-offset-2">
+                                <i class="btn btn-success pull-right" (click)="signup()"> Sign Up </i>
+                               </div>
+                           </div>
+                            
+                    </div>
+                </div> 
+        </div>
+    </div>
+</div>
