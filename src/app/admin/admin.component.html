@@ -1,37 +1,75 @@
-<nav class="navbar navbar-default">
-  <div class="container-fluid">
-    <div class="navbar-header">
-      <button type="button" class="navbar-toggle collapsed" data-toggle="collapse" data-target="#bs-example-navbar-collapse-1">
-        <span class="sr-only">Toggle navigation</span>
-        <span class="icon-bar"></span>
-        <span class="icon-bar"></span>
-        <span class="icon-bar"></span>
-      </button>
-      <a class="navbar-brand">Dashboard</a>
+
+<md-toolbar color="primary">
+
+     <span>Parking App</span>
+     <div class="button-row" fxLayout="row" fxShow="false" fxShow.gt-sm >
+        <button md-button [routerLink]="['/admin', {outlets: {'adminOutlet': ['viewusers']}}]">View Users <span class="sr-only">(current)</span></button>
+        <button md-button [routerLink]="['/admin', {outlets: {'adminOutlet': ['viewbooking']}}]">View Bookings</button>
+        <button md-button [routerLink]="['/admin', {outlets: {'adminOutlet': ['viewfeedback']}}]">View FeedBack</button>
+        <button md-button [routerLink]="['/admin', {outlets: {'adminOutlet': ['ground']}}]">View Areas</button>
+        <button md-button (click)="setDisplayAreas()">Insert Areas</button>
     </div>
 
-    <div class="collapse navbar-collapse" id="bs-example-navbar-collapse-1">
-      <ul class="nav navbar-nav">
-        <li><a clickable (click)="setDisplayJobs()">View Users <span class="sr-only">(current)</span></a></li>
-        <li><a clickable (click)="setDisplayCompanyList()">View Bookings</a></li>
-        <li><a clickable (click)="setDisplayStudentList()">View FeedBack</a></li>
-        <li><a [routerLink]="['/admin', {outlets: {'groundOutlet': ['ground']}}]">View Areas</a></li>
-        <li><a clickable (click)="setDisplayAreas()">Insert Areas</a></li>
-      </ul>
-      <ul class="nav navbar-nav navbar-right">
-       <li class="dropdown">
-          <a href="#" class="dropdown-toggle" data-toggle="dropdown" role="button" aria-expanded="false">{{authService.userName}}<span class="caret"></span></a>
-          <ul class="dropdown-menu" role="menu">
-            <li><a clickable (click)="setDisplayProfile()" id="editPbtn">Edit Profile</a></li>
-            <li class="divider"></li>
-           
-          </ul>
-        </li>
-        <li><span id="logoutBtn"class="btn btn-lg glyphicon glyphicon-off" clickable (click)="logout()"></span></li>
-      </ul>
-    </div>
-  </div>
-</nav>
+    <button md-button [md-menu-trigger-for]="NavMenu" fxHide="false" fxHide.gt-sm>
+     <md-icon>menu</md-icon>
+    </button>
+    <md-menu x-position="before" #NavMenu="mdMenu" >
+      <button md-button [routerLink]="['/admin', {outlets: {'adminOutlet': ['viewusers']}}]">View Users <span class="sr-only">(current)</span></button>
+        <button md-button [routerLink]="['/admin', {outlets: {'adminOutlet': ['viewbooking']}}]">View Bookings</button>
+        <button md-button [routerLink]="['/admin', {outlets: {'adminOutlet': ['viewfeedback']}}]">View FeedBack</button>
+        <button md-button [routerLink]="['/admin', {outlets: {'adminOutlet': ['ground']}}]">View Areas</button>
+        <button md-button (click)="setDisplayAreas()">Insert Areas</button>
+    </md-menu>
+
+
+     <span class="example-fill-remaining-space"></span>
+
+     <div fxLayout="row" fxShow="false" fxShow.gt-sm>
+         <span>{{authService.userName}}</span>
+     <button md-button [md-menu-trigger-for]="menu">         
+        <md-icon>more_vert</md-icon>
+     </button>
+        
+     </div>
+
+     <button md-button [md-menu-trigger-for]="menu"  fxHide="false" fxHide.gt-sm>
+            <span>User Name</span>
+     </button>
+       <md-menu #menu="mdMenu" x-position="before" >
+            <button md-menu-item (click)="setDisplayProfile()">
+              <md-icon>fingerprint</md-icon>
+              <span>Edit Profile</span>
+            </button>
+            <button md-menu-item  (click)="logout()">
+              <md-icon>power_settings_new</md-icon>
+              <span>Log Out</span>
+            </button>
+       </md-menu>    
+</md-toolbar> 
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
 
 <!-- Profile Form  -->
 <div class="AdminDetail" *ngIf="displayForm_Profile">
@@ -119,3 +157,4 @@
 <!-- Alert MSG  -->
 
 <router-outlet name="groundOutlet"></router-outlet>
+<router-outlet name="adminOutlet"></router-outlet>

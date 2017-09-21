@@ -5,7 +5,7 @@
 
   <div class="jobView col-xs-offset-3">
      <div class="row">
-         <div class="col-xs-3" id="container" *ngFor="let area of (GetAreasService.areas$ | async); let index=index;trackBy: trackById">
+         <div class="col-xs-3" id="container" *ngFor="let area of (GetAreasService.areas$ | async); let index=index;">
      
        
               <div  class="area" >
@@ -47,15 +47,15 @@
     </tr>
   </thead>
   <tbody>
-    <tr *ngFor="let i of area.slots; let ind=index;" >
+    <tr *ngFor="let i of sd; let ind=index;" >
       <td >{{ind+1}}</td>
-      <td><owl-date-time name="startDate" [(ngModel)]="sd[ind]" [type]="'calendar'" [dateFormat]="'YYYY-MM-DD'" [placeHolder]="'yyyy/mm/dd'"  [inputId]="'input1'"></owl-date-time></td>
-      <td><owl-date-time [(ngModel)]="st[ind]" [type]="'timer'" [dateFormat]="'hh:mm'" [placeHolder]="'hh:mm'"  [inputId]="'input2'" name="startTime"></owl-date-time></td>
-      <td><owl-date-time [(ngModel)]="et[ind]" [type]="'timer'" [dateFormat]="'hh:mm'" [placeHolder]="'hh:mm'"  [inputId]="'input3'" name="endTime"></owl-date-time></td>      
-      <td><owl-date-time name="endDate" [(ngModel)]="ed[ind]" [type]="'calendar'" [dateFormat]="'YYYY-MM-DD'" [placeHolder]="'yyyy/mm/dd'" [inputId]="'input4'"></owl-date-time></td>
+      <td ><owl-date-time name="startDate" [(ngModel)]="sd[ind]" [type]="'calendar'" [dateFormat]="'YYYY-MM-DD'" [placeHolder]="'yyyy/mm/dd'" [inputId]="'input'+ind" ></owl-date-time></td>
+      <td><owl-date-time [(ngModel)]="st[ind]" [type]="'timer'" [dateFormat]="'HH:mm'" [placeHolder]="'hh:mm'"   name="startTime" [inputId]="'input'+(ind+2)"></owl-date-time></td>
+      <td><owl-date-time [(ngModel)]="et[ind]" [type]="'timer'" [dateFormat]="'HH:mm'" [placeHolder]="'hh:mm'"  name="endTime" [inputId]="'input'+(ind+4)"></owl-date-time></td>      
+      <td><owl-date-time name="endDate" [(ngModel)]="ed[ind]" [type]="'calendar'" [dateFormat]="'YYYY-MM-DD'" [placeHolder]="'yyyy/mm/dd'" [inputId]="'input'+(ind+6)"></owl-date-time></td>
       <td  *ngIf="area.isAvail && ind==area.slotsIndex ; then showAvail; else showDashAvail"></td>
       <td><button class="btn btn-warning" (click)="check(ind)" type="button">Check</button></td>
-      <td><button class="btn btn-primary" type="submit" [disabled]="!enablebook && ind==area.slotsIndex || enablebook && ind!=area.slotsIndex  || !enablebook && ind!=area.slotsIndex ">Book</button></td>
+      <td><button class="btn btn-primary"(click)="setIndex(ind)" type="submit" [disabled]="!enablebook && ind==area.slotsIndex || enablebook && ind!=area.slotsIndex  || !enablebook && ind!=area.slotsIndex ">Book</button></td>
       <ng-template #showAvail >
         <td [ngClass]="availableClasses">{{area.availText}}</td>
       </ng-template>
@@ -89,7 +89,7 @@
 
 <!-- Alert MSG  -->
 <div  *ngIf="isformSubmitted">
-  <div  *ngIf="isCorrect;then success;else danger;" style="bottom:0px;position: absolute;width: 100%;">
+  <div  *ngIf="isBooked;then success;else danger;" style="bottom:0px;position: absolute;width: 100%;">
   </div>
 </div>
 <ng-template #success>

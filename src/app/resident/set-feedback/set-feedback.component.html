@@ -1,0 +1,39 @@
+<form class="form-horizontal col-xs-12 col-md-6 col-md-offset-2" #f="ngForm" (ngSubmit)="onSubmitFeedback(f.value)" >
+  <fieldset >
+    <hr>
+    <legend class="text-center">FEEDBACK</legend>
+    
+
+    <div class="form-group">
+      <div class="col-xs-9 col-xs-offset-3">
+        <textarea class="form-control" rows="15"  name="notifytext" ngModel placeholder="Notification here"></textarea>
+        <span class="help-block">Feedback Description.</span>
+      </div>
+    </div>
+
+    <div class="form-group">
+      <div class="col-xs-10 col-md-9 col-md-offset-3">
+        <button type="reset" class="btn btn-warning">Cancel</button>
+        <button type="submit" class="btn btn-primary pull-right">Update!</button>
+      </div>
+    </div>
+  </fieldset>
+</form>
+<!-- Alert MSG  -->
+<div  *ngIf="isformSubmitted">
+  <div  *ngIf="isCorrect;then success;else danger;" style="bottom:0px;position: absolute;width: 100%;">
+  </div>
+</div>
+<ng-template #success>
+  <div class="alert alert-dismissible alert-success text-center msgShow" style="bottom:0px;position: absolute;width: 100%;" >
+  <button type="button" class="close" data-dismiss="alert" (click)="changeFlag()">&times;</button>
+  <strong> Feedback successfully!</strong>
+  </div>
+</ng-template>
+<ng-template #danger>
+  <div class="alert alert-dismissible alert-danger text-center msgShow" style="bottom:0px;position: absolute;width: 100%;">
+  <button type="button" class="close" data-dismiss="alert" (click)="changeFlag()">&times;</button>
+  <strong> Feedback Failure!</strong>
+  </div>
+</ng-template>
+<!-- Alert MSG  -->

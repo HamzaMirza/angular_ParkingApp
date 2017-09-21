@@ -1,10 +1,120 @@
 <nav class="navbar navbar-default">
   <div class="container-fluid">
+    <div class="navbar-header">
+      <button type="button" class="navbar-toggle collapsed" data-toggle="collapse" data-target="#bs-example-navbar-collapse-1">
+        <span class="sr-only">Toggle navigation</span>
+        <span class="icon-bar"></span>
+        <span class="icon-bar"></span>
+        <span class="icon-bar"></span>
+      </button>
+      <a class="navbar-brand">Dashboard</a>
+    </div>
 
-    <span class="h3" style="position:absolute; left:40%;">PARKING APP</span>
+    <div class="collapse navbar-collapse" id="bs-example-navbar-collapse-1">
+      <ul class="nav navbar-nav">
+        <li><a [routerLink]="['/resident', {outlets: {'userOutlet': ['setfeedback']}}]">Send FeedBack <span class="sr-only">(current)</span></a></li>
+        <li><a [routerLink]="['/resident', {outlets: {'userOutlet': ['userbooking']}}]">View Bookings</a></li>
+        <li><a [routerLink]="['/resident', {outlets: {'userOutlet': ['viewfeedback']}}]">View FeedBack</a></li>
+        <li><a [routerLink]="['/resident', {outlets: {'userOutlet': ['ground']}}]">View Areas</a></li>
+      </ul>
       <ul class="nav navbar-nav navbar-right">
+       <li class="dropdown">
+          <a href="#" class="dropdown-toggle" data-toggle="dropdown" role="button" aria-expanded="false">{{authService.userName}}<span class="caret"></span></a>
+          <ul class="dropdown-menu" role="menu">
+            <li><a clickable (click)="setDisplayProfile()" id="editPbtn">Edit Profile</a></li>
+            <li class="divider"></li>
+            
+          </ul>
+        </li>
         <li><span id="logoutBtn"class="btn btn-lg glyphicon glyphicon-off" clickable (click)="logout()"></span></li>
       </ul>
-    
+    </div>
   </div>
 </nav>
+
+<!-- Profile Form  -->
+<div class="AdminDetail" *ngIf="displayForm_Profile">
+  <form class="form-horizontal col-xs-12 col-md-6 col-md-offset-2" #f="ngForm" (ngSubmit)="onSubmitProfile(f.value)" >
+  <fieldset >
+    <legend class="text-center">PROFILE</legend>
+    <div class="form-group">
+      <label for="inputName" class="col-xs-3 control-label">Name</label>
+      <div  class="col-xs-9">
+        <input type="text" class="form-control" name="name" placeholder="Full Name Here" [ngModel]="details.name" required>
+      </div>
+    </div>
+    <div class="form-group">
+      <label for="inputFName" class="col-xs-3 control-label">Address</label>
+      <div class="col-xs-9">
+        <input type="text" class="form-control" name="address" placeholder="Address Here" [ngModel]="details.address">
+      </div>
+    </div>
+      <div class="form-group">
+      <label for="inputnum" class="col-xs-3 control-label">Cell #</label>
+      <div class="col-xs-9">
+        <input type="number" class="form-control" name="cellNum" placeholder="Phone Number" [ngModel]="details.cellNum">
+      </div>
+    </div>
+    <div class="form-group">
+      <div class="col-xs-10 col-md-9 col-md-offset-3">
+        <button type="reset" class="btn btn-warning">Cancel</button>
+        <button type="submit" class="btn btn-primary pull-right">Update!</button>
+      </div>
+    </div>
+  </fieldset>
+</form>
+
+</div>
+<!-- Profile Form  -->
+
+
+
+<!-- SLOTS  Form  -->
+<div class="SlotDetail" *ngIf="displayForm_Slots">
+  <form class="form-horizontal col-xs-12 col-md-6 col-md-offset-2" #f="ngForm" (ngSubmit)="onSubmitAreas(f.value)" >
+  <fieldset >
+    <legend class="text-center">SLOTS</legend>
+    <div class="form-group">
+      <label for="inputAreaName" class="col-xs-3 control-label">Area Name</label>
+      <div  class="col-xs-9">
+        <input type="text" class="form-control" name="areaName" placeholder="Area Name Here" required ngModel>
+      </div>
+    </div>
+      <div class="form-group">
+      <label for="inputslots" class="col-xs-3 control-label">Total Slots</label>
+      <div class="col-xs-9">
+        <input type="number" class="form-control" name="totalSlots" placeholder="total Slots here" ngModel>
+      </div>
+    </div>
+    <div class="form-group">
+      <div class="col-xs-10 col-md-9 col-md-offset-3">
+        <button type="reset" class="btn btn-warning">Cancel</button>
+        <button type="submit" class="btn btn-primary pull-right">Update!</button>
+      </div>
+    </div>
+  </fieldset>
+</form>
+
+</div>
+<!-- SLOTS Form  -->
+
+<!-- Alert MSG  -->
+<div  *ngIf="isformSubmitted">
+  <div  *ngIf="isCorrect;then success;else danger;" style="bottom:0px;position: absolute;width: 100%;">
+  </div>
+</div>
+<ng-template #success>
+  <div class="alert alert-dismissible alert-success text-center msgShow" style="bottom:0px;position: absolute;width: 100%;" >
+  <button type="button" class="close" data-dismiss="alert" (click)="changeFlag()">&times;</button>
+  <strong> Updated successfully!</strong>
+  </div>
+</ng-template>
+<ng-template #danger>
+  <div class="alert alert-dismissible alert-danger text-center msgShow" style="bottom:0px;position: absolute;width: 100%;">
+  <button type="button" class="close" data-dismiss="alert" (click)="changeFlag()">&times;</button>
+  <strong> Update Failure!</strong>
+  </div>
+</ng-template>
+<!-- Alert MSG  -->
+
+<router-outlet name="userOutlet"></router-outlet>

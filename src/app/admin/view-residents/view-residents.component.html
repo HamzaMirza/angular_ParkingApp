@@ -1,0 +1,20 @@
+<!-- View Students List  -->
+<table class="table table-striped table-hover ">
+  <thead>
+    <tr>
+      <th>Sr#</th>
+      <th>Resident Name</th>
+      <th>Phone #</th>
+    </tr>
+  </thead>
+  <tbody *ngFor="let detail of (GetAllUsersService.user$|async);let i=index;"  >
+       <tr>
+
+          <td>{{i+1}}</td>
+          <td>{{detail.name}}</td>
+          <td>{{detail.cellNum}}</td>     
+     </tr>
+
+  </tbody>
+</table> 
+<!-- View Students List  -->

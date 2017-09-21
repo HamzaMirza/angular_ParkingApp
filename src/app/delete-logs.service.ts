@@ -2,6 +2,7 @@ import { Injectable, Attribute } from '@angular/core';
 import { AngularFireDatabase } from 'angularfire2/database';
 import {FirebaseListObservable } from 'angularfire2/database';
 import { DatePipe } from '@angular/common';
+import { GetAllBookingsService } from './get-all-bookings.service';
 
 @Injectable()
 export class DeleteLogsService {
@@ -16,7 +17,7 @@ getCurrentTime() {
    else
     return "none";
 };
- constructor(private af:AngularFireDatabase)  { 
+ constructor(private af:AngularFireDatabase,public GetAllBookingsService:GetAllBookingsService)  { 
      this.af.list('/slots', { preserveSnapshot: true}).subscribe(
        snapshots=>{
 
@@ -40,27 +41,29 @@ getCurrentTime() {
                               (
                                   snapshot2=>
                                   {
+                                    let temp=snapshot2.val();
+                                    let tempString='/slots/'+snapshot.key+'/slotsArr/'+snapshot1.key+"/"+snapshot2.key;
+                                    
                                       if(this.date.transform(snapshot2.val().endDate,'MM/dd/yyyy')<this.dateToday)
-                                        console.log(snapshot2.val());
+                                      {
+                                        this.deleteBooking(''+tempString,temp);
+                                        
+                                      }
                                       else if(this.date.transform(snapshot2.val().endDate,'MM/dd/yyyy')==this.dateToday)
                                        {
                                          
-                                             let c = snapshot2.val().endDate.split(':');
+                                             let c = snapshot2.val().endTime.split(':');
                                              let currentTime=this.getCurrentTime().split(':');
-                                             //Bug to remove
-                                             let hour=(+currentTime[0]);
-                                              if((+currentTime[0])>12)
-                                                hour= (+currentTime[0])-12;
-                                             ////////////////////////
-                                             if(c[0]<hour)
+                                             
+                                             if(c[0]<currentTime[0])
                                              {
-                                               console.log("innerTime",snapshot2.val());
+                                               this.deleteBooking(''+tempString,temp);
                                              }
-                                              else if(c[0]==hour)
+                                              else if(c[0]==currentTime[0])
                                              {
                                                if(c[1]<=currentTime[1])
                                                 {
-                                                  console.log("innerTime",snapshot2.val());
+                                                  this.deleteBooking(''+tempString,temp);
                                                 }
                                              }
                                           
@@ -81,5 +84,15 @@ getCurrentTime() {
        }
      );
   }
-
+    deleteBooking(path:string,temp)
+    {
+       this.af.object(path+'/').remove().then(
+        success=>{
+            console.log("Deleted:",temp);
+            this.GetAllBookingsService.resetData();
+            
+        },
+        error=>console.log("Failed to deleted:",temp)
+    );
+    }
 }

@@ -1,0 +1,41 @@
+
+    <legend class="text-center">FEEDBACKS</legend>
+    
+    <div class="col-xs-12 col-md-8 col-md-offset-2" id="container"  *ngFor="let post of (GetNotificationService.notifications$ | async); let index=index;">
+     
+      <div class="row">
+
+          <h2 class="h2">{{post.text}}</h2>   
+          <div class="listgroup list-group">
+            <p class="list-item"> {{post.details}}</p>      
+          </div>
+          
+        <div class="footer">
+          <i class="h6 date"><b>Date</b>:{{post.date}}</i>
+          <span class="companyName">{{post.owner}}</span>
+            <button class="btn btn-primary footerbtn" (click)="loadModal(index,post)" *ngIf="post?.replied=='no'" data-target="#replyModal" data-toggle="modal" >Reply</button>
+            <button class="btn btn-success footerbtn" disabled *ngIf="post?.replied=='yes'" >Applied</button>   
+     
+        </div>
+    </div>
+     
+   </div>
+
+<div class="modal fade col-xs-12" tabindex="-1" id="replyModal"
+        data-keyboard="false" data-backdrop="static">
+    <div class="modal-dialog modal-lg">
+        <div class="modal-content">
+            <div class="modal-header">
+                <button type="button" class="close" data-dismiss="modal" (click)="resetModal()">
+                    &times;
+                </button>
+            </div>
+            <div class="modal-body">
+                <form #f="ngForm" (ngSubmit)="onReply(f.value)" >
+                  <input type="text" name="reply" [ngModel]="reply">
+                  <button type="submit"  data-dismiss="modal">Send</button>
+                </form>    
+            </div>
+        </div>
+    </div>
+</div>

@@ -1,0 +1,17 @@
+  <legend class="text-center">FEEDBACKS</legend>
+    
+    <div class="col-xs-12 col-md-8 col-md-offset-2" id="container" *ngFor="let post of (GetNotificationService.notifications$ | async); let index=index;">
+      <div class="row" *ngIf="post.owner==authService.userName">
+   
+          <div class="listgroup list-group">
+            <p class="list-item text-center h3"> {{post.text}}</p>      
+          </div>
+          
+        <div class="footer">
+          <i class="h6 date"><b>Date</b>:{{post.date}}</i>
+          <span class="companyName">{{post.owner}}</span>
+       
+        </div>
+    </div>
+     
+   </div>

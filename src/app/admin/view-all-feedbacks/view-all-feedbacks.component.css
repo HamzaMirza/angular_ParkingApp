@@ -1,0 +1,61 @@
+.msgShow{
+    position: fixed;
+    margin-top: 5px;
+    bottom: 0px;
+    width: 100%;
+}
+#logoutBtn
+{
+    color:red;
+}
+#editPbtn:hover
+{
+    cursor: pointer;
+}
+.footer
+{
+    margin-top:34px; 
+}
+.footerbtn
+{
+    font-weight: bolder;       
+    float:right;
+    box-shadow: 0 4px 8px 0 rgba(0, 0, 0, 0.2), 0 6px 20px 0 rgba(0, 0, 0, 0.19);
+}
+.date
+{
+    font-weight: bolder;       
+    float:left;
+    clear:both;
+    color: #ADAD0C;
+}
+.companyName
+{
+    text-align:center;
+    font-size: 15px;
+        padding-left: 27%;
+}
+#container
+{
+    background-color: honeydew;
+    padding: 20px 29px 14px 59px;
+     border:1px ridge #dfdfdf;
+    margin-top: 8px;
+     box-shadow: -1px 4px 5px 0 rgba(0, 0, 0, 0.2), 3px 6px 5px 0 rgba(0, 0, 0, 0.19); 
+}
+#container .h2
+{
+    font-family: 'Franklin Gothic Medium', 'Arial Narrow', Arial, sans-serif;
+    padding: 2px 0px;
+    margin:0px 0px 2px 0px;
+    width:100%;
+}
+#container .list-item
+{
+    
+    margin-top: 15px;
+    padding-left: 25px;
+    width:100%; 
+   font-weight: 500;
+
+}
