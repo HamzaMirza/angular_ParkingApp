@@ -10,12 +10,13 @@ import { GetAllBookingsService } from '../../get-all-bookings.service';
 export class ViewUserBookingsComponent implements OnInit {
 
   constructor(public authService: AuthService,public GetAllBookingsService:GetAllBookingsService) { }
-
+showSpinner: boolean = true;
  index=-1;
   detail:any;
   counter=0;
   ngOnInit() {
     this.GetAllBookingsService.startCounter();
+
     console.log(this.authService.userName);
   }
   getCounter()

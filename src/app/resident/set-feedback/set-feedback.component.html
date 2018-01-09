@@ -1,4 +1,30 @@
-<form class="form-horizontal col-xs-12 col-md-6 col-md-offset-2" #f="ngForm" (ngSubmit)="onSubmitFeedback(f.value)" >
+<md-card class="cart-form">
+  <md-card-header style="border-left:6px solid red;padding-left: 23px;color: red;">
+    <md-card-title style="text-align:center;">FEEDBACK</md-card-title>
+  </md-card-header>
+ 
+  <md-card-content>
+     <form class="example-form"  #f="ngForm" (ngSubmit)="onSubmitFeedback(f.value)">
+
+    <md-input-container class="example-half-width"  color="accent">
+       <input mdInput rows="15" type="text" rows="15" name="notifytext" ngModel placeholder="Notification here">
+      <br>
+    </md-input-container>
+
+
+      <md-grid-list cols="2" rowHeight="2:1" id="action">
+       <md-grid-tile colspan="1"> <button md-raised-button style="float:left; width:100%;" color="warn" type="reset">Cancel</button></md-grid-tile>
+       <md-grid-tile colspan="1"> <button md-raised-button style="float:left; width:100%;" type="submit" color="primary" >Send  <md-icon style=" right: 5px;top: 5px;position: absolute;">send</md-icon> </button></md-grid-tile>
+      </md-grid-list>
+
+    </form>
+  </md-card-content>
+
+</md-card>
+
+
+
+<!-- <form class="form-horizontal col-xs-12 col-md-6 col-md-offset-2" #f="ngForm" (ngSubmit)="onSubmitFeedback(f.value)" >
   <fieldset >
     <hr>
     <legend class="text-center">FEEDBACK</legend>
@@ -18,7 +44,7 @@
       </div>
     </div>
   </fieldset>
-</form>
+</form> -->
 <!-- Alert MSG  -->
 <div  *ngIf="isformSubmitted">
   <div  *ngIf="isCorrect;then success;else danger;" style="bottom:0px;position: absolute;width: 100%;">

@@ -1,6 +1,4 @@
-<p>
-  view-booking works!
-</p>
+<md-progress-bar mode="indeterminate" color="warn" *ngIf="GetAllBookingsService.counter>GetAllBookingsService.srNo.length-1"></md-progress-bar>
 
 <!-- View Booking List  -->
 <div class="bookingView" >
@@ -21,7 +19,7 @@
   <tbody >
      {{GetAllBookingsService.startCounter()}}
     <ng-container *ngFor="let bhabha of (GetAllBookingsService.srNo );let j=index;">
-   
+      
     <tr *ngFor="let detail of (GetAllBookingsService.AllparticularareasSlotsData$[j] | async);let i=index;">
       
       <ng-container *ngIf="detail?.startDate">

@@ -12,6 +12,7 @@ export class ViewBookingComponent implements OnInit {
   index=-1;
   detail:any;
   counter=0;
+   displayedColumns = ['Sr#', 'Resident Name', 'Area Name', 'Slot #','Start Date','Start Time','End Time','End Date','Actions'];
   ngOnInit() {
     this.GetAllBookingsService.startCounter();
   }

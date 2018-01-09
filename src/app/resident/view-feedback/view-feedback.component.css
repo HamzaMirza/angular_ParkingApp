@@ -1,27 +1,4 @@
-.msgShow{
-    position: fixed;
-    margin-top: 5px;
-    bottom: 0px;
-    width: 100%;
-}
-#logoutBtn
-{
-    color:red;
-}
-#editPbtn:hover
-{
-    cursor: pointer;
-}
-.footer
-{
-    margin-top:34px; 
-}
-.footerbtn
-{
-    font-weight: bolder;       
-    float:right;
-    box-shadow: 0 4px 8px 0 rgba(0, 0, 0, 0.2), 0 6px 20px 0 rgba(0, 0, 0, 0.19);
-}
+
 .date
 {
     font-weight: bolder;       
@@ -29,12 +6,7 @@
     clear:both;
     color: #ADAD0C;
 }
-.companyName
-{
-    text-align:center;
-    font-size: 15px;
-        padding-left: 27%;
-}
+
 #container
 {
     background-color: honeydew;
@@ -43,13 +15,27 @@
     margin-top: 8px;
      box-shadow: -1px 4px 5px 0 rgba(0, 0, 0, 0.2), 3px 6px 5px 0 rgba(0, 0, 0, 0.19); 
 }
-#container .h2
+md-card
+{
+    text-align: center;
+}
+.hh2
 {
     font-family: 'Franklin Gothic Medium', 'Arial Narrow', Arial, sans-serif;
     padding: 2px 0px;
     margin:0px 0px 2px 0px;
     width:100%;
+
+    
 }
+.example-card .content
+{
+    font-size: 20px;
+    padding: 2px 0px;
+    margin:0px 0px 2px 0px;
+    width:100%;
+    text-align: center;
+} 
 #container .list-item
 {
     
@@ -58,4 +44,8 @@
     width:100%; 
    font-weight: 500;
 
+}
+.example-card
+{
+    width: 95%;
 }

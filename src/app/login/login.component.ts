@@ -19,8 +19,10 @@ userName:string;
   repassword:string;
   cellNum:string;
   error:any;
+  showSignUp:boolean=false;
   types=['Admin','Resident'];
   typeSelected:string=this.types[0];
+  showSpinner:boolean=false;
   todos$: FirebaseListObservable<any[]>;
  addTodo(email: string,type:string,uid:string,userName:string): void {
   this.todos$.push({ userName: userName, type: type,uid:uid,email:email});
@@ -30,6 +32,7 @@ userName:string;
     this.authService.getisLoggedIn().then(
       (success) => 
       {
+        this.showSpinner=true;
         if(this.authService.isLoggedIn)
         {
           this.af.list('/users', { preserveSnapshot: true}).subscribe(snapshots=>
@@ -47,6 +50,7 @@ userName:string;
         }
         else
         {
+          this.showSpinner=false;
           console.log(this.authService.isLoggedIn);
         }
 
@@ -63,8 +67,17 @@ userName:string;
    
   }
 signup() {
-  if(this.password === this.repassword)
+  if(this.userName==""|| this.email==""|| this.password=="")
+      {
+          this.error="ALL FIELDS ARE REQUIRED";
+            return false;
+      }
+       else
+        {
+
+  if(this.password)
     {
+      this.showSpinner=true;
       try
       {
         let err= this.authService.signup(this.email, this.password).then(
@@ -86,7 +99,7 @@ signup() {
                           
                           this.af.object('/usersDetails/' + snapshot.key)
                             .update({key:snapshot.key}).then(
-                              success=> this.login()
+                              success=> this.onSubmitLogin('a')
                             );
                         }
                     });
@@ -105,7 +118,7 @@ signup() {
                               
                               this.af.object('/usersDetails_resident/' + snapshot.key)
                                 .update({key:snapshot.key}).then(
-                              success=> this.login()
+                              success=> this.onSubmitLogin('a')
                             );
                             }
                         });
@@ -114,7 +127,7 @@ signup() {
                 
               
           },
-          (error)=>this.error=error//"Email/Password not correct!"
+          (error)=>{this.error=error;this.showSpinner=false;}//"Email/Password not correct!"
         );
         
       
@@ -122,6 +135,7 @@ signup() {
       }
       catch(e){}
       finally{
+        this.showSpinner=true;
          this.router.navigate(['/'+this.typeSelected.toLowerCase()]);
       }
       
@@ -130,11 +144,17 @@ signup() {
   else
     this.error="Password donot match";
    
+        }   
   }
-
-  login() {
+signupEnable()
+            {
+              this.showSignUp=!this.showSignUp;
+            }
+  onSubmitLogin(data) {
     try
     {
+      this.showSpinner=true;
+
       var tf:boolean=false;
       var viewed:boolean=false;
        this.authService.login(this.email, this.password).then(
@@ -154,7 +174,7 @@ signup() {
           });
             
          },
-        (error)=>this.error="Email/Password not correct!"
+        (error)=>{this.error="Email/Password not correct!";this.showSpinner=false;}
        );
      
        
@@ -162,17 +182,20 @@ signup() {
     catch(e)
     {
       this.error=e;
+      this.showSpinner=false;
     }
     finally{
            if(!tf && viewed) 
             {
               this.error="Account not found";
+              this.showSpinner=true;
               this.logout();
             }
     }
   }
 
   logout() {
+
     this.authService.logout();
   }
 }

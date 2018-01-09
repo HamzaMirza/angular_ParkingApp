@@ -17,7 +17,8 @@
   <tbody >
      {{GetAllBookingsService.startCounter()}}
     <ng-container *ngFor="let bhabha of (GetAllBookingsService.srNo );let j=index;">
-   
+  <md-progress-bar mode="indeterminate" color="warn" *ngIf="GetAllBookingsService.counter>GetAllBookingsService.srNo.length-1"></md-progress-bar>
+
     <tr *ngFor="let detail of (GetAllBookingsService.AllparticularareasSlotsData$[j] | async);let i=index;">
       
       <ng-container *ngIf="detail?.startDate && detail?.rUid==authService.uid">

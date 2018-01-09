@@ -1,0 +1,14 @@
+ .cart-form {
+
+    width: 30%;
+    min-width: 178px;
+    position: absolute;
+    left: 30%;
+    top: 90px;
+    padding: 40px 1px;
+}
+md-input-container {
+
+        width: 80%;
+    padding: 0px 5px 0px 15px;
+}

@@ -1,0 +1,47 @@
+<!-- SLOTS  Form  -->
+<md-card class="cart-form">
+  <md-card-header style="border-left:6px solid red;padding-left: 23px;color: red;">
+    <md-card-title style="text-align:center;">SLOTS</md-card-title>
+  </md-card-header>
+ 
+  <md-card-content>
+     <form class="example-form"  #f="ngForm" (ngSubmit)="onSubmitAreas(f.value)">
+
+    <md-input-container class="example-half-width"  color="accent">
+       <input mdInput placeholder="EMAIL" name="areaName" placeholder="Area Name Here" required ngModel>
+      <br>
+    </md-input-container>
+    <md-input-container class="example-half-width"  color="accent">
+       <input mdInput type="number"  name="totalSlots" placeholder="total Slots here" ngModel>
+      <br>
+    </md-input-container>
+
+      <md-grid-list cols="2" rowHeight="2:1" id="action">
+       <md-grid-tile colspan="1"> <button md-raised-button style="float:left; width:100%;" color="warn" type="reset">Cancel</button></md-grid-tile>
+       <md-grid-tile colspan="1"> <button md-raised-button style="float:left; width:100%;" type="submit" color="primary" >Update!</button></md-grid-tile>
+      </md-grid-list>
+
+    </form>
+  </md-card-content>
+
+</md-card>
+
+
+<!-- SLOTS Form  --><!-- Alert MSG  -->
+<div  *ngIf="isformSubmitted">
+  <div  *ngIf="isCorrect;then success;else danger;" style="bottom:0px;position: absolute;width: 100%;">
+  </div>
+</div>
+<ng-template #success>
+  <div class="alert alert-dismissible alert-success text-center msgShow" style="bottom:0px;position: absolute;width: 100%;" >
+  <button type="button" class="close" data-dismiss="alert" (click)="changeFlag()">&times;</button>
+  <strong> Updated successfully!</strong>
+  </div>
+</ng-template>
+<ng-template #danger>
+  <div class="alert alert-dismissible alert-danger text-center msgShow" style="bottom:0px;position: absolute;width: 100%;">
+  <button type="button" class="close" data-dismiss="alert" (click)="changeFlag()">&times;</button>
+  <strong> Update Failure!</strong>
+  </div>
+</ng-template>
+<!-- Alert MSG  -->

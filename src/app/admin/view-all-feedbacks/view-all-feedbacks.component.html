@@ -1,8 +1,29 @@
 
     <legend class="text-center">FEEDBACKS</legend>
-    
-    <div class="col-xs-12 col-md-8 col-md-offset-2" id="container"  *ngFor="let post of (GetNotificationService.notifications$ | async); let index=index;">
+    <md-grid-list cols="2" rowHeight="300px">
+  <md-grid-tile  *ngFor="let post of (GetNotificationService.notifications$ | async); let index=index; ">
+      <md-card class="example-card" >
+        <md-card-header >
+           
+        </md-card-header>
+        <md-card-content >
+         <p class="hh2">{{post.owner}}</p>
+            <span class="content">{{post.text}}</span>
+          
+        </md-card-content>
+        <md-card-actions>
+            <i class="h6 date"><b>Date</b>:{{post.date}}</i>
+             <button md-raised-button color="primary" class=" footerbtn" (click)="loadModal(index,post)" *ngIf="post?.replied=='no'" data-target="#replyModal" data-toggle="modal" >Reply</button>
+            <button md-button  class=" footerbtn" disabled *ngIf="post?.replied=='yes'" >Replied</button>   
+        </md-card-actions>
+        </md-card>
+  </md-grid-tile>
+
+</md-grid-list>
+<!-- 
+    <div class="col-xs-12 col-md-8 col-md-offset-2" id="container"  *ngFor="let post of (GetNotificationService.notifications$ | async); let index=index; ">
      
+
       <div class="row">
 
           <h2 class="h2">{{post.text}}</h2>   
@@ -10,7 +31,8 @@
             <p class="list-item"> {{post.details}}</p>      
           </div>
           
-        <div class="footer">
+        <div class="footer" >
+           
           <i class="h6 date"><b>Date</b>:{{post.date}}</i>
           <span class="companyName">{{post.owner}}</span>
             <button class="btn btn-primary footerbtn" (click)="loadModal(index,post)" *ngIf="post?.replied=='no'" data-target="#replyModal" data-toggle="modal" >Reply</button>
@@ -20,22 +42,47 @@
     </div>
      
    </div>
-
+ -->
 <div class="modal fade col-xs-12" tabindex="-1" id="replyModal"
         data-keyboard="false" data-backdrop="static">
-    <div class="modal-dialog modal-lg">
+    <div class="modal-dialog modal-sm">
         <div class="modal-content">
             <div class="modal-header">
+                
                 <button type="button" class="close" data-dismiss="modal" (click)="resetModal()">
                     &times;
                 </button>
             </div>
             <div class="modal-body">
                 <form #f="ngForm" (ngSubmit)="onReply(f.value)" >
-                  <input type="text" name="reply" [ngModel]="reply">
-                  <button type="submit"  data-dismiss="modal">Send</button>
-                </form>    
+                  <md-input-container style="width:80%;"  color="accent">
+                    <input mdInput placeholder="Reply" name="reply" [(ngModel)]="reply" required>
+                        <br>
+                    </md-input-container>
+                    <button md-icon-button type="submit" color="primary" data-dismiss="modal">
+                         <md-icon>send</md-icon>
+                        
+                            </button>
+                    </form>    
             </div>
         </div>
     </div>
 </div>
+<!-- Alert MSG  -->
+<div  *ngIf="isformSubmitted">
+  <div  *ngIf="isCorrect;then success;else danger;" style="bottom:0px;position: absolute;width: 100%;">
+  </div>
+</div>
+<ng-template #success>
+  <div class="alert alert-dismissible alert-success text-center msgShow" style="bottom:0px;position: absolute;width: 100%;" >
+  <button type="button" class="close" data-dismiss="alert" (click)="changeFlag()">&times;</button>
+  <strong> Feedback successfully!</strong>
+  </div>
+</ng-template>
+<ng-template #danger>
+  <div class="alert alert-dismissible alert-danger text-center msgShow" style="bottom:0px;position: absolute;width: 100%;">
+  <button type="button" class="close" data-dismiss="alert" (click)="changeFlag()">&times;</button>
+  <strong> Feedback Failure!</strong>
+  </div>
+</ng-template>
+<!-- Alert MSG  -->

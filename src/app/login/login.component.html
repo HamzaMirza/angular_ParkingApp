@@ -1,4 +1,4 @@
-<div id="containerLogin" class="col-xs-12 col-md-6 col-md-offset-1">
+<!-- <div id="containerLogin" class="col-xs-12 col-md-6 col-md-offset-1">
 <div class="row">
     <div>
         <div id="initialStage"  class="col-xs-12 col-md-6 col-md-offset-3">
@@ -70,4 +70,84 @@
                 </div> 
         </div>
     </div>
-</div>
+</div> -->
+
+  
+    <md-progress-bar mode="indeterminate" color="warn" *ngIf="showSpinner"></md-progress-bar>
+        
+<md-card class="cart-form" *ngIf="!showSignUp" >
+  <md-card-title style="border-left:6px solid red;padding-left: 23px;color: red;">
+        
+   LOGIN
+    </md-card-title>
+	
+  <md-card-content>
+  <p *ngIf="error!='hide'" id="error">{{error}}</p>
+    <form class="example-form"  #f="ngForm" (ngSubmit)="onSubmitLogin(f.value)">
+
+    <md-input-container class="example-half-width"  color="accent">
+      <input mdInput placeholder="EMAIL" name="email" [(ngModel)]="email" required>
+      <br>
+    </md-input-container>
+    <md-input-container class="example-half-width"  color="accent">
+      <input mdInput placeholder="PASSWORD" name="password" type="password" [(ngModel)]="password" required>
+      <br>
+    </md-input-container>
+
+      <md-grid-list cols="2" rowHeight="2:1" id="action">
+       <md-grid-tile colspan="2"> <button md-raised-button style="float:left; width:100%;" color="primary" type="submit">LOG IN</button></md-grid-tile>
+      </md-grid-list>
+
+    </form>
+    </md-card-content>
+  <md-card-actions>
+    <span>Not a member?</span> <button md-button  color="accent" (click)="signupEnable()"> Click here to Sign Up </button>
+    </md-card-actions>
+</md-card>
+
+
+  
+  
+               
+<md-card class="cart-form" *ngIf="showSignUp">
+  <md-card-title style="border-left:6px solid red;padding-left: 23px;color: red;">
+        
+   SIGN UP
+    </md-card-title>
+	
+  <md-card-content>
+  <p *ngIf="error!='hide'" id="error">{{error}}</p>
+    <form class="example-form"  #f="ngForm" (ngSubmit)="onSubmitLogin(f.value)">
+  <md-input-container class="example-half-width"  color="accent">
+      <input mdInput placeholder="USER NAME" name="userName" [(ngModel)]="userName" >
+      <br>
+    </md-input-container>
+    <md-input-container class="example-half-width"  color="accent">
+      <input mdInput placeholder="EMAIL" name="email" [(ngModel)]="email">
+      <br>
+    </md-input-container>
+    <md-input-container class="example-half-width"  color="accent">
+      <input mdInput placeholder="PASSWORD" name="password" type="password" [(ngModel)]="password">
+      <br>
+    </md-input-container>
+      <md-select placeholder="User Role"  color="accent" [(ngModel)]="typeSelected" name="type">
+        <md-option *ngFor="let role of types" [value]="role">
+          {{ role }}
+        </md-option>
+      </md-select>
+   
+        <md-grid-list cols="2" rowHeight="2:1" id="action">
+       <md-grid-tile colspan="2"> <button md-raised-button style="float:left; width:100%;" color="primary"  (click)="signup()">SIGN UP</button></md-grid-tile>
+      </md-grid-list>
+    
+
+    </form>
+    </md-card-content>
+  <md-card-actions>
+    <span>Already a member?</span> <button md-button  color="accent" (click)="signupEnable()"> Click here to Login </button>
+    </md-card-actions>
+</md-card>
+
+
+  
+  

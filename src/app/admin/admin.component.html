@@ -7,7 +7,7 @@
         <button md-button [routerLink]="['/admin', {outlets: {'adminOutlet': ['viewbooking']}}]">View Bookings</button>
         <button md-button [routerLink]="['/admin', {outlets: {'adminOutlet': ['viewfeedback']}}]">View FeedBack</button>
         <button md-button [routerLink]="['/admin', {outlets: {'adminOutlet': ['ground']}}]">View Areas</button>
-        <button md-button (click)="setDisplayAreas()">Insert Areas</button>
+        <button md-button [routerLink]="['/admin', {outlets: {'adminOutlet': ['createslots']}}]">Insert Areas</button>
     </div>
 
     <button md-button [md-menu-trigger-for]="NavMenu" fxHide="false" fxHide.gt-sm>
@@ -18,7 +18,7 @@
         <button md-button [routerLink]="['/admin', {outlets: {'adminOutlet': ['viewbooking']}}]">View Bookings</button>
         <button md-button [routerLink]="['/admin', {outlets: {'adminOutlet': ['viewfeedback']}}]">View FeedBack</button>
         <button md-button [routerLink]="['/admin', {outlets: {'adminOutlet': ['ground']}}]">View Areas</button>
-        <button md-button (click)="setDisplayAreas()">Insert Areas</button>
+        <button md-button [routerLink]="['/admin', {outlets: {'adminOutlet': ['createslots']}}]">Insert Areas</button>
     </md-menu>
 
 
@@ -33,13 +33,14 @@
      </div>
 
      <button md-button [md-menu-trigger-for]="menu"  fxHide="false" fxHide.gt-sm>
-            <span>User Name</span>
+                        <span>{{authService.userName}}</span><md-icon>more_vert</md-icon>
+
      </button>
        <md-menu #menu="mdMenu" x-position="before" >
-            <button md-menu-item (click)="setDisplayProfile()">
+            <!-- <button md-menu-item (click)="setDisplayProfile()">
               <md-icon>fingerprint</md-icon>
               <span>Edit Profile</span>
-            </button>
+            </button> -->
             <button md-menu-item  (click)="logout()">
               <md-icon>power_settings_new</md-icon>
               <span>Log Out</span>
@@ -108,34 +109,7 @@
 
 
 
-<!-- SLOTS  Form  -->
-<div class="SlotDetail" *ngIf="displayForm_Slots">
-  <form class="form-horizontal col-xs-12 col-md-6 col-md-offset-2" #f="ngForm" (ngSubmit)="onSubmitAreas(f.value)" >
-  <fieldset >
-    <legend class="text-center">SLOTS</legend>
-    <div class="form-group">
-      <label for="inputAreaName" class="col-xs-3 control-label">Area Name</label>
-      <div  class="col-xs-9">
-        <input type="text" class="form-control" name="areaName" placeholder="Area Name Here" required ngModel>
-      </div>
-    </div>
-      <div class="form-group">
-      <label for="inputslots" class="col-xs-3 control-label">Total Slots</label>
-      <div class="col-xs-9">
-        <input type="number" class="form-control" name="totalSlots" placeholder="total Slots here" ngModel>
-      </div>
-    </div>
-    <div class="form-group">
-      <div class="col-xs-10 col-md-9 col-md-offset-3">
-        <button type="reset" class="btn btn-warning">Cancel</button>
-        <button type="submit" class="btn btn-primary pull-right">Update!</button>
-      </div>
-    </div>
-  </fieldset>
-</form>
 
-</div>
-<!-- SLOTS Form  -->
 
 <!-- Alert MSG  -->
 <div  *ngIf="isformSubmitted">
@@ -155,6 +129,4 @@
   </div>
 </ng-template>
 <!-- Alert MSG  -->
-
-<router-outlet name="groundOutlet"></router-outlet>
 <router-outlet name="adminOutlet"></router-outlet>

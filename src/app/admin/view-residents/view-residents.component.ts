@@ -8,10 +8,11 @@ import { AuthService } from '../../auth.service';
   styleUrls: ['./view-residents.component.css']
 })
 export class ViewResidentsComponent implements OnInit {
-
+showSpinner: boolean = true;
   constructor(public GetAllUsersService:GetAllUsersService,public GetAreasService: GetAreasService,public authService: AuthService) { }
 
   ngOnInit() {
+    this.GetAllUsersService.user$.subscribe(() => this.showSpinner = false);
   }
 
 }

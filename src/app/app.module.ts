@@ -24,7 +24,7 @@ import { ResidentComponent } from './resident/resident.component';
 import { GroundComponent } from './ground/ground.component';
 import { AComponent } from './a/a.component';
 import { BComponent } from './b/b.component';
-import { MdButtonModule,MdMenuModule,MdToolbarModule,MdIconModule,MdCardModule,MdListModule,MdInputModule,MdGridListModule,MdSelectModule} from '@angular/material';
+import { MdDialogModule,MdProgressBarModule,MdTableModule,MdButtonModule,MdMenuModule,MdToolbarModule,MdIconModule,MdCardModule,MdListModule,MdInputModule,MdGridListModule,MdSelectModule} from '@angular/material';
 import { BrowserAnimationsModule } from '@angular/platform-browser/animations';
 import {FlexLayoutModule} from "@angular/flex-layout";
 import { DateTimePickerModule } from 'ng-pick-datetime';
@@ -34,6 +34,7 @@ import { ViewFeedbackComponent } from './resident/view-feedback/view-feedback.co
 import { SetFeedbackComponent } from './resident/set-feedback/set-feedback.component';
 import { ViewUserBookingsComponent } from './resident/view-user-bookings/view-user-bookings.component';
 import { ViewAllFeedbacksComponent } from './admin/view-all-feedbacks/view-all-feedbacks.component';
+import { CreateSlotsComponent } from './admin/create-slots/create-slots.component';
 
 @NgModule({
   declarations: [
@@ -49,7 +50,8 @@ import { ViewAllFeedbacksComponent } from './admin/view-all-feedbacks/view-all-f
     ViewFeedbackComponent,
     SetFeedbackComponent,
     ViewUserBookingsComponent,
-    ViewAllFeedbacksComponent
+    ViewAllFeedbacksComponent,
+    CreateSlotsComponent
   ],
   imports: [
     BrowserModule,
@@ -80,6 +82,11 @@ import { ViewAllFeedbacksComponent } from './admin/view-all-feedbacks/view-all-f
                     {
                         path:'viewusers',
                         component:ViewResidentsComponent,
+                         outlet: 'adminOutlet'
+                    },
+                     {
+                        path:'createslots',
+                        component:CreateSlotsComponent,
                          outlet: 'adminOutlet'
                     },
                     {
@@ -142,7 +149,10 @@ import { ViewAllFeedbacksComponent } from './admin/view-all-feedbacks/view-all-f
     MdGridListModule,
     FlexLayoutModule,
     MdSelectModule,
-    DateTimePickerModule
+    DateTimePickerModule,
+    MdTableModule,
+    MdProgressBarModule,
+    MdDialogModule
 	
   ],
   providers: [GetNotificationService,GetAllUsersService,GetAllBookingsService,DateService,DeleteLogsService,GetAreasService,AuthService,AuthGuard,AngularFireDatabase,AngularFireAuth,AngularFireDatabase],

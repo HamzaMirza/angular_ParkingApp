@@ -8,10 +8,11 @@ import { GetNotificationService } from '../../get-notification.service';
   styleUrls: ['./view-feedback.component.css']
 })
 export class ViewFeedbackComponent implements OnInit {
-
+showSpinner: boolean = true;
   constructor(public authService: AuthService,public GetNotificationService:GetNotificationService) { }
 
   ngOnInit() {
+    this.GetNotificationService.notifications$.subscribe(() => this.showSpinner = false);
   }
 
 }

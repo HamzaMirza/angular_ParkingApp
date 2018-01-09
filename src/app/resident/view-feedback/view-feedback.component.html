@@ -1,7 +1,28 @@
-  <legend class="text-center">FEEDBACKS</legend>
-    
-    <div class="col-xs-12 col-md-8 col-md-offset-2" id="container" *ngFor="let post of (GetNotificationService.notifications$ | async); let index=index;">
-      <div class="row" *ngIf="post.owner==authService.userName">
+<md-progress-bar mode="indeterminate" color="warn" *ngIf="showSpinner"></md-progress-bar>
+  
+<legend class="text-center">FEEDBACKS</legend>
+      <md-grid-list cols="2" rowHeight="300px">
+        <ng-container *ngFor="let post of (GetNotificationService.notifications$ | async); let index=index; ">
+        <md-grid-tile *ngIf="post.owner==authService.userName" >
+            <md-card class="example-card" >
+
+                <md-card-content >
+                <p class="hh2">{{post.owner}}</p>
+                    <span class="content">{{post.text}}</span>
+                
+                </md-card-content>
+                <md-card-actions>
+                    <i class="h6 date"><b>Date</b>:{{post.date}}</i>
+                </md-card-actions>
+                </md-card>
+        </md-grid-tile>
+</ng-container>
+</md-grid-list>
+
+
+    <!-- <div class="col-xs-12 col-md-8 col-md-offset-2" *ngFor="let post of (GetNotificationService.notifications$ | async); let index=index;">
+      <ng-container  id="container">
+        <div class="row" *ngIf="post.owner==authService.userName">
    
           <div class="listgroup list-group">
             <p class="list-item text-center h3"> {{post.text}}</p>      
@@ -13,5 +34,6 @@
        
         </div>
     </div>
+      </ng-container>
      
-   </div>
+   </div> -->
